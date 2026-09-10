@@ -1,0 +1,121 @@
+# Lab 06 — MP Materials (NYSE: MP)
+
+Prepared September 10, 2026. Run `python dcf.py` in this directory. Dollar amounts are USD millions unless marked per share. Forecast cash flows occur at year-end; Years 1–5 correspond to 2026–2030. This is a FY2025-based classroom DCF using mixed-date market assumptions, not a fully updated September 2026 valuation.
+
+## Sources
+
+- **K:** [MP Materials FY2025 Form 10-K](https://www.sec.gov/Archives/edgar/data/1801368/000180136826000008/mp-20251231.htm), filed February 26, 2026. Locators below use printed report pages, not browser line numbers.
+- **H:** [Federal Reserve H.15](https://www.federalreserve.gov/releases/h15/), September 10, 2026 release, September 9 column, nominal 10-year Treasury constant maturity row.
+- **F:** [Federal Reserve June 17, 2026 Summary of Economic Projections](https://www.federalreserve.gov/monetarypolicy/fomcprojtabl20260617.htm), Table 1, longer-run medians.
+- **M:** [Stock Analysis MP statistics](https://stockanalysis.com/stocks/mp/statistics/), closing quote, Total Valuation and Stock Price Statistics; page updated September 10, 2026. Retrieval session: September 10, 2026, after 17:43 EDT. Market timestamp used below is the quote timestamp, not retrieval time.
+
+## Model input register
+
+| Input | Value | Unit | As-of date / period | Exact source or locator | Classification |
+|---|---:|---|---|---|---|
+| `starting_fcff` | -305.180 | USD millions | FY2025 | Calculation below; K, cash-flow statement p. 68; Item 7 interest and tax tables pp. 46–47 | Calculated reference; unused in projection |
+| `explicit_fcff[0]` | -502.0 | USD millions | Forecast 2026, adopted September 10, 2026 | User-adopted scenario; component table below | estimate |
+| `explicit_fcff[1]` | -427.0 | USD millions | Forecast 2027, adopted September 10, 2026 | User-adopted scenario; component table below | estimate |
+| `explicit_fcff[2]` | -202.0 | USD millions | Forecast 2028, adopted September 10, 2026 | User-adopted scenario; component table below | estimate |
+| `explicit_fcff[3]` | 98.0 | USD millions | Forecast 2029, adopted September 10, 2026 | User-adopted scenario; component table below | estimate |
+| `explicit_fcff[4]` | 248.0 | USD millions | Forecast 2030, adopted September 10, 2026 | User-adopted scenario; component table below | estimate |
+| `wacc` | 0.1202 | Annual decimal rate (12.02%) | Estimate adopted September 10, 2026; mixed underlying dates below | Professor's formula; WACC reconciliation below | estimate |
+| `terminal_growth` | 0.04 | Annual decimal rate (4%) | June 17, 2026 economic projections; adopted September 10 | F, Table 1; 2% real growth + 2% PCE inflation proxy | estimate |
+| `non_operating_cash` | 1830.286 | USD millions | December 31, 2025 | K, Balance Sheets p. 64: 1166.011 cash/equivalents + 664.275 short-term investments | Reported amounts; non-operating classification is an estimate |
+| `debt` | 1023.011 | USD millions, carrying value | December 31, 2025 | K, Balance Sheets p. 64; Note 10 pp. 86, 89: 67.411 + 931.330 + 3.904 + 20.366 | Calculated from reported amounts |
+| `diluted_shares` | 170.126753 | Millions of shares | FY2025 weighted average | K, Note 20 p. 104, diluted denominator: 170126753 / 1000000 | Reported denominator, converted units |
+| `sensitivity_wacc_values` | [0.09, 0.10, 0.11] | Annual decimal rates | Lab settings retained September 10, 2026 | User's requested sensitivity settings | Scenario estimates, not sourced market forecasts |
+| `sensitivity_terminal_growth_values` | [0.02, 0.03, 0.04] | Annual decimal rates | Lab settings retained September 10, 2026 | User's requested sensitivity settings | Scenario estimates |
+| `reverse_target_share_price` | 51.32 | USD/share | September 10, 2026, 16:00 EDT (20:00 UTC) | M, regular-session closing quote | Observed market price; reverse target |
+| `reverse_solve_for` | uniform_fcff_shift | USD millions added to each year | September 10, 2026 | Explicit-FCFF reverse-model design | Scenario definition |
+| `reverse_lower_bound` | -500.0 | USD millions/year | September 10, 2026 | Existing editable reverse bracket | Scenario bound |
+| `reverse_upper_bound` | 500.0 | USD millions/year | September 10, 2026 | Existing editable reverse bracket | Scenario bound |
+
+The sensitivity settings intentionally retain the requested grid; its WACC rows do not include the 12.02% base case. They are editable scenarios, not replacements for the base WACC.
+
+## Starting FCFF and explicit forecasts
+
+FY2025 reference calculation: after-tax interest = 31.481 × (1 − 0.271) = 22.949649. Starting FCFF = −155.755 + 22.949649 − 172.375 = −305.180351, rounded to −305.180. Sources: K, cash-flow statement p. 68, interest table p. 46, tax table p. 47 / Note 12 p. 92. The model does not multiply this negative starting value by growth rates.
+
+Every future component below is an estimate adopted for this lab on September 10, 2026, not company guidance. Formula: FCFF = operating cash flow + after-tax interest − gross capital expenditures.
+
+| Year | OCF estimate | After-tax interest estimate | Gross capex estimate | FCFF estimate | Scenario reasoning and supporting locator |
+|---|---:|---:|---:|---:|---|
+| 2026 | 50 | 23 | 575 | -502 | Operating recovery with heavy investment; K, Item 7, Magnetics p. 50 and Liquidity p. 51 |
+| 2027 | 150 | 23 | 600 | -427 | Assume better utilization but peak construction spending; K, Item 7 pp. 41–42; Note 16, Contract Balances p. 97 |
+| 2028 | 225 | 23 | 450 | -202 | Assume only limited initial 10X cash contribution; K, Item 7, Downstream Manufacturing p. 42 |
+| 2029 | 325 | 23 | 250 | 98 | Assume construction spending falls and cash conversion improves; K, Item 7 p. 51; Note 3, Offtake Agreement p. 79 |
+| 2030 | 400 | 23 | 175 | 248 | Successful-ramp scenario; K, Item 7 pp. 41–42, 51; Note 3 p. 79 |
+
+Disclosure anchors: GM magnet sales expected in 2026; 10X commissioning in 2028; 2026 capital costs of 500–600 net of awards; increasing working-capital needs (K, Item 7 pp. 42, 50–51). DoW price support and capacity-linked EBITDA provisions are in Note 3 pp. 78–79. These disclosures support scenario timing, not the exact forecast amounts.
+
+OCF budgets for 2026–2030 and annual capex budgets after 2026 are unresolved as company guidance; the explicit estimates above fill those modeling gaps. The 2026 gross-capex estimate assumes 550 net spending plus 25 award receipts; the 25 is an estimate. The 23 interest addback rounds the starting-year calculation and is held constant without a future financing or cash-tax schedule. OCF estimates assume continued working-capital consumption and avoid counting prepaid deliveries as new receipts. Financing proceeds are not FCFF. The guarantee is not consolidated FCFF.
+
+## WACC and terminal growth reconciliation
+
+| WACC component | Value | Unit | Date | Source / classification |
+|---|---:|---|---|---|
+| Risk-free rate | 4.83 | % annually | September 9, 2026 | H, nominal 10-year row; observed |
+| Beta | 1.95 | Unitless | September 10, 2026 | M, Beta (5Y); provider estimate |
+| Equity risk premium | 5.00 | % annually | Lab assumption, adopted September 10, 2026 | Professor's methodology supplied by user |
+| Representative note coupon | 3.00 | % annually | December 31, 2025 terms | K, Note 10 p. 87, 2030 notes; proxy for debt cost |
+| Effective tax rate | 27.1 | % | FY2025 | K, Note 12 p. 92; reported |
+| Debt fair value for WACC | 2378.651 | USD millions | December 31, 2025 | K, Note 19 p. 103; 82.449 + 2172.782 + 98.081 + 25.339 |
+| Equity market capitalization | 9140 | USD millions | September 10, 2026 close | M, Total Valuation; rounded observed value |
+
+Cost of equity = 4.83% + 1.95 × 5% = 14.58%. After-tax debt cost = 3% × (1 − 27.1%) = 2.187%. Debt weight = 2378.651 / (2378.651 + 9140) = 20.6504%; equity weight = 79.3496%. WACC = 79.3496% × 14.58% + 20.6504% × 2.187% = 12.0208%, rounded to the adopted 12.02%.
+
+This preserves the previously selected classroom estimate. Historical fair-value debt is used for WACC, while carrying debt is used for the balance-sheet bridge. Coupon versus market yield, different dates, convertible-option value, and preferred-stock treatment limit consistency. A same-date comprehensive capital-cost estimate remains unresolved; no new value is invented.
+
+Terminal growth = approximately 2% real GDP growth + 2% inflation = 4%, based on F's longer-run medians. PCE inflation is a proxy for GDP-deflator inflation, so 4% is an estimate rather than a published nominal-GDP forecast. It reflects the economy, not MP's or rare-earth market growth. 4% < 12.02%; spread = 8.02 percentage points.
+
+## Bridge conventions and limitations
+
+Cash includes liquid investments and excludes restricted cash. Its treatment assumes operating valuation excludes investment income and includes future operating/capital spending; an exact minimum operating-cash deduction remains unresolved. Do not deduct forecast capex from opening cash again.
+
+Debt includes both convertible issues, Samarium borrowing, and equipment notes. Equipment borrowing is in other liabilities (K, Note 10 p. 89). The debt entry is gross carrying debt, not net debt or total liabilities. Operating lease expense stays in operating cash flow; operating lease liabilities are not separately capitalized in this simplified model.
+
+The EPS denominator follows the professor's instruction. Antidilutive instruments are excluded from that denominator (K, Note 20 p. 104). Preferred stock is a separate claim (K, Balance Sheets p. 64). Its valuation and conversion treatment remain unresolved in the simplified EV + cash − debt bridge. Consequently the printed equity value is the lab bridge result, not a comprehensive allocation to common equity. No unsupported preferred-value adjustment is inserted.
+
+## Verified model results
+
+`python dcf.py` completed successfully on September 10, 2026. Explicit PV, terminal PV, and the bridge use year-end discounting from the FY2025 base; the model does not roll forward cash flows or balance-sheet claims to today's date.
+
+| Output | Value | Unit |
+|---|---:|---|
+| FCFF Years 1–5 | [-502, -427, -202, 98, 248] | USD millions |
+| PV of explicit FCFF | -729.2845 | USD millions |
+| Terminal value at Year 5 | 3215.9601 | USD millions |
+| PV of terminal value | 1823.1937 | USD millions |
+| Enterprise value | 1093.9092 | USD millions |
+| Equity value, simplified bridge | 1901.1842 | USD millions |
+| Value per diluted share | 11.1751 | USD/share |
+| PV of terminal value / EV | 1.6667 | Fraction (166.67%) |
+
+Terminal value's share exceeds 100% because explicit-period PV is negative. The terminal value uses Year 5 FCFF as its base, so normalization is especially consequential.
+
+Sensitivity, USD/share:
+
+| WACC / terminal growth | 2% | 3% | 4% |
+|---|---:|---:|---:|
+| 9% | 14.1696 | 16.6284 | 20.0707 |
+| 10% | 11.9354 | 13.7133 | 16.0840 |
+| 11% | 10.2305 | 11.5642 | 13.2790 |
+
+Cells with terminal growth >= WACC print INVALID. Reverse DCF adds the same dollar adjustment to all five FCFFs, including the terminal base. It holds the base path, WACC, terminal growth, cash, debt, shares, and five-year horizon fixed. Negative dollar FCFF is valid; no percentage-growth floor is relevant.
+
+At the −500 and +500 bounds, model prices are −21.0202 and 43.3704 respectively. The 51.32 target is outside this range, so the bisection reports **No solution in that bracket**. No bound is presented as a solution, and the bracket has not been widened to force one.
+
+## Reasonableness Check
+
+Today's comparison price is **$51.32 per share, September 10, 2026 at 16:00 EDT (20:00 UTC), regular-session close**, from M. This is a timestamped close, not a live or after-hours quote.
+
+DCF/current-price multiple = 11.1751040242 / 51.32 = **0.217753x**, approximately **0.218x**. This is **outside** the professor's **0.5x–2.0x** range, below its lower bound. Inputs have not been tuned to meet that range. The comparison is diagnostic: the model uses a FY2025 base and historical share denominator, whereas the quote is current.
+
+## Conditional Recommendation
+
+Initiate if the share price falls to $11.17 or below and diligence confirms sustainable Year 5 FCFF of at least $248 million with no material adverse preferred-stock or dilution adjustment; otherwise defer initiation and monitor execution.
+
+## Item to monitor
+
+Monitor whether 10X begins commissioning in 2028, the disclosed timing in K, Item 7 p. 42. A delay would challenge the assumed post-2028 capex decline and 2029 FCFF crossover; update the dollar cash-flow path when evidence changes.
