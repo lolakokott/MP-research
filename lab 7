@@ -1,0 +1,147 @@
+## PYTHON
+
+"""Comparable P/E valuation; standard library only, with no data fetching."""
+
+# EDIT INPUTS HERE. Use decimal strings to preserve the exact supplied values.
+# Use None for missing prices or EPS. EPS basis: FY2024 total GAAP diluted EPS.
+TARGET = {"ticker": "ABG", "name": "Asbury Automotive", "price": "243.03", "eps": "21.50"}
+PEERS = [
+    {"ticker": "AN", "name": "AutoNation", "price": "169.84", "eps": "16.92"},
+    {"ticker": "GPI", "name": "Group 1 Automotive", "price": "421.48", "eps": "36.81"},
+]
+
+from fractions import Fraction
+from statistics import median
+
+
+def positive(value):
+    """Return an exact positive fraction, or None for unusable input."""
+    try:
+        number = Fraction(str(value))
+    except (ValueError, TypeError, ZeroDivisionError):
+        return None
+    return number if number > 0 else None
+
+
+def fixed(value, places=2, signed=False):
+    """Round only for display, using exact round-half-to-even arithmetic."""
+    scaled = round(value * 10 ** places)
+    sign = "-" if scaled < 0 else ("+" if signed else "")
+    whole, fraction = divmod(abs(scaled), 10 ** places)
+    return f"{sign}{whole:,}.{fraction:0{places}d}"
+
+
+def ticker(row):
+    return str(row["ticker"]).strip().upper()
+
+
+def main():
+    target_ticker = ticker(TARGET)
+    target_price = positive(TARGET.get("price"))
+    target_eps = positive(TARGET.get("eps"))
+    print("P/E valuation | FY2024 total GAAP diluted EPS | USD per share")
+    print(f"Target: {TARGET['name']} ({target_ticker})")
+    for label, value in [("Price", target_price), ("Diluted EPS", target_eps)]:
+        print(f"  {label}: " + (f"${fixed(value)}" if value is not None else
+                                   "not meaningful (missing, invalid, or nonpositive)"))
+    print("  P/E: " + (f"{fixed(target_price / target_eps, 6)}x"
+                         if target_price is not None and target_eps is not None
+                         else "not meaningful (requires positive price and EPS)"))
+
+    # Deduplicate by normalized ticker, keeping the first occurrence.
+    unique = []
+    seen = {target_ticker}
+    for peer in PEERS:
+        symbol = ticker(peer)
+        if symbol in seen:
+            print(f"Excluded {symbol}: target or duplicate ticker (first entry retained)")
+            continue
+        seen.add(symbol)
+        unique.append(peer)
+
+    valid = {}
+    print("\nPeers:")
+    for peer in unique:
+        symbol = ticker(peer)
+        price, eps = positive(peer.get("price")), positive(peer.get("eps"))
+        if price is None or eps is None:
+            print(f"  {symbol}: P/E not meaningful (missing, invalid, or nonpositive price/EPS)")
+        else:
+            valid[symbol] = price / eps
+            print(f"  {symbol}: P/E = {fixed(valid[symbol], 6)}x")
+
+    multiples = list(valid.values())
+    full_estimate = None
+    print(f"\nUsable peers: {len(multiples)}")
+    if not multiples:
+        print("No usable peers; peer median and implied prices not meaningful.")
+    else:
+        peer_median = median(multiples)
+        print(f"Median peer P/E: {fixed(peer_median, 6)}x")
+        if target_eps is None:
+            print("Implied prices not meaningful: target EPS must be positive.")
+        else:
+            full_estimate = peer_median * target_eps
+            if len(multiples) == 1:
+                print(f"Reference estimate: ${fixed(full_estimate)} (one valid peer; no range)")
+            else:
+                for label, multiple in [("Minimum", min(multiples)),
+                                        ("Median", peer_median),
+                                        ("Maximum", max(multiples))]:
+                    print(f"{label} peer P/E implied price: ${fixed(multiple * target_eps)}")
+
+    print("\nLeave-one-peer-out sensitivity (change from full-peer estimate):")
+    if not unique:
+        print("  No peers to remove.")
+    for peer in unique:
+        symbol = ticker(peer)
+        remaining = [value for key, value in valid.items() if key != symbol]
+        if not remaining:
+            print(f"  Remove {symbol}: no estimate (no usable peers remain)")
+        elif target_eps is None:
+            print(f"  Remove {symbol}: not meaningful (target EPS must be positive)")
+        else:
+            estimate = median(remaining) * target_eps
+            change = estimate - full_estimate
+            note = "reference estimate; one valid peer; no range" if len(remaining) == 1 else "median estimate"
+            print(f"  Remove {symbol}: ${fixed(estimate)}; change {fixed(change, signed=True)} USD ({note})")
+
+    print("\nExact arithmetic throughout; rounding is for display only.")
+    print("Implied equity price = peer P/E x target EPS; no cash/debt bridge.")
+
+
+if __name__ == "__main__":
+    main()
+
+# Lab 07 - Results
+
+P/E valuation | FY2024 total GAAP diluted EPS | USD per share
+Target: Asbury Automotive (ABG)
+  Price: $243.03
+  Diluted EPS: $21.50
+  P/E: 11.303721x
+
+Peers:
+  AN: P/E = 10.037825x
+  GPI: P/E = 11.450149x
+
+Usable peers: 2
+Median peer P/E: 10.743987x
+Minimum peer P/E implied price: $215.81
+Median peer P/E implied price: $231.00
+Maximum peer P/E implied price: $246.18
+
+Leave-one-peer-out sensitivity (change from full-peer estimate):
+  Remove AN: $246.18; change +15.18 USD (reference estimate; one valid peer; no range)
+  Remove GPI: $215.81; change -15.18 USD (reference estimate; one valid peer; no range)
+
+Exact arithmetic throughout; rounding is for display only.
+Implied equity price = peer P/E x target EPS; no cash/debt bridge.
+
+# Change the Peer Set
+
+**Prediction:** Removing Group 1 will lower the implied price because Group 1 has a higher P/E.
+
+**Result:** Removing Group 1 lowers the implied price to $215.81, a decrease of $15.18. With only AutoNation remaining, there is only one P/E to use, so it is a reference estimate instead of a range.
+
+
