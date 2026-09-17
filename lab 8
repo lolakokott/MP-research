@@ -1,0 +1,81 @@
+## Represent — Peer Policy
+
+**Target:** MP Materials Corp. (MP)
+**Comparison Date:** September 10, 2026
+
+### Peer Policy
+
+I will consider publicly traded operating companies involved in rare earth materials, mining, processing, or similar businesses. Peers should have similar business activities to MP Materials and publicly available financial information by September 10, 2026.
+
+### Rejection Criteria
+
+I will exclude a company if its business model is too different from MP Materials, if the necessary financial information was not public by September 10, 2026, or if its annual diluted EPS cannot be used for a P/E comparison.
+
+## Candidate 1 — Energy Fuels Inc. (UUUU)
+
+Business: Energy Fuels operates uranium projects and the White Mesa Mill, which also produces rare earth products.
+
+Important difference: Energy Fuels has significant uranium exposure, while MP Materials is more focused on rare earth materials and magnets.
+
+Price on September 10, 2026: $13.63
+Annual diluted EPS: -$0.38
+Fiscal year-end: December 31, 2025
+Publication date: February 26, 2026
+
+Business source: Energy Fuels 2025 Results Release, “About Energy Fuels” and “Rare Earth Element Milestones.”
+
+**Sources:**
+- Business & EPS: Energy Fuels 2025 annual results / 10-K
+- Price: Nasdaq Historical Data, UUUU, September 10, 2026
+
+Decision: Exclude. Energy Fuels has negative annual diluted EPS, so a meaningful P/E multiple cannot be calculated.
+
+## Candidate 2 — Idaho Strategic Resources, Inc. (IDR)
+
+Business: Idaho Strategic Resources operates the Golden Chest gold mine and New Jersey Mill and also holds several rare-earth exploration projects.
+
+Important difference: IDR's producing operations are primarily gold mining and milling, while its rare-earth operations are still in exploration. MP Materials operates rare-earth mining, separation, and downstream magnet facilities.
+
+Price on September 10, 2026: $30.59
+Annual diluted EPS: $1.14
+Fiscal year-end: December 31, 2025
+Publication date: March 23, 2026
+
+Sources: IDR FY2025 Form 10-K, Item 1, “General Description of the Business,” and Item 8, Consolidated Statements of Operations, p. 46. Historical price source remains unresolved through the professor's preferred market source.
+
+Decision: Qualify. IDR has positive diluted EPS and some rare-earth exposure, but its current earnings primarily come from gold operations rather than rare-earth production. Therefore, I would treat it as a qualified rather than directly comparable peer.
+
+## Implement
+
+I replaced the Asbury inputs with MP Materials and included Idaho Strategic Resources (IDR) as my qualified peer. Energy Fuels was excluded because it had negative annual diluted EPS.
+
+IDR has a P/E ratio of **26.83x** based on a price of $30.59 and annual diluted EPS of $1.14.
+
+MP Materials had annual GAAP diluted EPS of **-$0.50** for FY2025. Because MP Materials has negative annual earnings, its P/E ratio and implied P/E share price are not meaningful. Therefore, the peer comparison cannot provide a defensible P/E valuation for MP Materials.
+
+**MP EPS Source:** MP Materials FY2025 Form 10-K, Item 8, Note 20 — Earnings (Loss) Per Share, p. 104, “Diluted earnings (loss) per common share,” 2025 column.
+
+## Validate
+
+I checked IDR's P/E by hand:
+
+**$30.59 / $1.14 = 26.83x**
+
+This matches the calculator's P/E of 26.83x.
+
+Before removing IDR, I predicted that there would be no peer estimate because IDR is my only qualified peer. The calculator confirmed this and reported **“no estimate (no usable peers remain).”**
+
+The main obstacle to using P/E for MP Materials is its negative FY2025 diluted EPS of **-$0.50**. Because earnings are negative, MP's P/E and an implied P/E share price are not meaningful. Positive annual diluted earnings for MP Materials would be needed for P/E to support a valuation.
+
+## Evolve
+
+| Method | Result                                     |
+| ------ | ------------------------------------------ |
+| DCF    | $11.17 per share                           |
+| P/E    | Not meaningful because MP has negative EPS |
+
+**AI criticism:** The DCF depends heavily on the assumption that MP's future cash flow will improve.
+
+**Decision: Accept.** My DCF relies heavily on estimated future cash flows, especially the 2030 FCFF assumption.
+
+**What could change my mind:** Stronger company guidance or actual results supporting future cash flow growth could change my conclusion.
