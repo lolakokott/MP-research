@@ -1,0 +1,20 @@
+# Lab 09 — Pro-Forma Build
+
+The model correctly rejected the intentionally broken FY2026E cash balance, identifying a balance sheet gap of -$61.4 million.
+
+## Question/Answer
+
+What are five years of a company's statements worth, built from assumptions you can defend, and how do you know the statements are right?
+
+The ABG pro-forma model reproduces the known answer.
+
+- FY2026E Revenue: $18,323.0 million
+- FY2030E Revenue: $19,678.3 million
+- FY2026E FCFE: $211.4 million
+- FY2030E FCFE: $342.3 million
+- FY2026E Cash: $101.8 million
+- FY2030E Cash: $719.8 million
+- Value per share: $291.75
+- Share of value after 2030: 79.76%
+
+The balance sheet check equals 0.0.
