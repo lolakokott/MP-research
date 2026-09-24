@@ -1,0 +1,86 @@
+# Lab 10 — MP Materials (MP)
+
+## Historical Financials
+
+Income statement amounts cover the year; balance sheet amounts are as of December 31. Parentheses indicate losses.
+
+| Item | 2023 | 2024 | 2025 |
+|---|---:|---:|---:|
+| Revenue | 253.445 | 203.855 | 224.441 |
+| Gross profit | Unresolved | Unresolved | Unresolved |
+| SG&A | 79.245 | 83.299 | 112.066 |
+| Net income (loss) | 24.307 | (65.424) | (85.874) |
+| Inventory — current | 95.182 | 107.905 | 171.560 |
+| Inventory — noncurrent | 13.350 | 19.031 | 80.539 |
+| Total inventory | 108.532 | 126.936 | 252.099 |
+| PP&E, net | 1,158.054 | 1,251.496 | 1,369.817 |
+| Shareholders' equity | 1,365.779 | 1,054.880 | 1,978.757 |
+
+| Fiscal year | Source filing | Financial statement PDF pages |
+|---|---|---|
+| 2023 | [mp-10k2024.pdf](MP-research/mp-10k2024.pdf) | Balance sheet: 109; income statement: 111 |
+| 2024 | [mp-10k2025.pdf](MP-research/mp-10k2025.pdf) | Balance sheet: 120; income statement: 122 |
+| 2025 | [mp-10k2026.pdf](MP-research/mp-10k2026.pdf) | Balance sheet: 124; income statement: 126 |
+
+MP does not report a gross-profit subtotal, and its reported cost of sales excludes depreciation, depletion, and amortization (DD&A). Gross profit therefore remains unresolved. The 2025 shareholders' equity figure excludes separately reported redeemable preferred stock.
+
+## Historical Ratios
+
+| Item | 2023 | 2024 | 2025 |
+|---|---:|---:|---:|
+| Gross margin | Unresolved | Unresolved | Unresolved |
+| SG&A / gross profit | Unresolved | Unresolved | Unresolved |
+| Inventory days | 374.7 | 204.5 | 324.8 |
+| Depreciation / opening net PP&E | 4.70% | 5.49% | 5.56% |
+| Cash capital spending ($ millions) | 261.897 | 186.418 | 172.375 |
+| Effective tax rate | 26.51% | 29.91% | 27.09% |
+| Reported revenue growth | −51.95% | −19.57% | +10.10% |
+| Organic / comparable revenue growth | Not disclosed | Not disclosed | Not disclosed |
+
+- Inventory days = year-end current inventory / reported cost of sales excluding DD&A × 365. Noncurrent inventory is excluded.
+- Depreciation / PP&E = depreciation expense / opening net PP&E. The depreciation amounts are 43.998, 63.558, and 69.587; opening PP&E is 935.743, 1,158.054, and 1,251.496.
+- Capital spending is cash additions to PP&E, shown as positive spending. The data-provider comparison remains unresolved.
+- Effective tax rate = tax expense / pretax income. Tax benefits and pretax losses are both negative in 2024 and 2025.
+- Reported growth = current revenue / prior-year revenue − 1. The 2023 calculation uses 2022 revenue of 527.510.
+
+Additional source pages in the same filings: 2023 cash flows p. 115, depreciation p. 133, tax p. 146; 2024 cash flows p. 127, depreciation p. 146, tax p. 162; 2025 cash flows p. 131, depreciation p. 162, tax p. 177. All page references are PDF pages.
+
+## Forecast Assumptions
+
+Five-year lists run from 2026 through 2030.
+
+| Assumption | Value | Label | Reason |
+|---|---|---|---|
+| Revenue growth | 10% annually | judgment | Round the latest reported growth of 10.10%. NdPr volume growth is not the same as total revenue growth. |
+| Gross margin proxy | 14.10% before DD&A | judgment | Use 2025 revenue minus reported cost of sales: (224.441 − 192.789) / 224.441. This is not confirmed reported gross margin. |
+| SG&A | 354.06% of the pre-DD&A profit proxy | judgment | Preserve the 2025 relationship: 112.066 / (224.441 − 192.789). |
+| Inventory days | 325 days | judgment | Round the latest historical ratio of 324.8 days. |
+| Depreciation / opening net PP&E | 5.56% | judgment | Retain the latest historical ratio. |
+| Capital spending | 550 in 2026; 206.897 annually in 2027–2030 | judgment | Use the 2026 guidance midpoint, then the three-year historical average. Assume no government-award receipts. |
+| Tax rate | 28% on positive pretax income; zero on losses | judgment | Approximately the historical average, without assuming tax refunds. |
+| NdPr sales volume | 2,500; 3,000; 3,500; 4,000; 4,500 metric tons | judgment | Add roughly 500 tons annually rather than repeat early-stage percentage growth. |
+| Floor-plan financing | None / zero — not applicable | judgment | ABG's dealership financing structure does not apply to MP. |
+
+Management guidance: the 2025 10-K states that 2026 capital costs are expected to be **500–600 million, net of government-award proceeds** (mp-10k2026.pdf, PDF p. 100). This is guidance for 2026 only; the later-year spending assumption is judgment.
+
+## Company-Specific Line
+
+**NdPr sales volume replaces ABG's same-store growth concept.** MP's expansion depends on selling more separated rare-earth material used in magnets, rather than increasing sales at existing stores. Volume helps explain growth, but prices and other products also affect total revenue.
+
+| NdPr sales volume | 2023 | 2024 | 2025 |
+|---|---:|---:|---:|
+| Metric tons of NdPr oxide equivalent | 10 | 1,142 | 1,994 |
+
+Sources: mp-10k2024.pdf, PDF p. 76; mp-10k2025.pdf, PDF p. 93; mp-10k2026.pdf, PDF p. 96.
+
+## Financing Judgment
+
+| Assumption | Value | Label | Reason |
+|---|---|---|---|
+| New long-term borrowing | 300 million in 2030; zero in 2026–2029 | judgment | Fund the projected 266.25 million shortfall with a modest cushion, without increasing the 235 million revolver limit. |
+
+This is additional to the refinancing already assumed. The 2025 10-K discusses seeking debt or equity financing if needed (mp-10k2026.pdf, PDF p. 100), but does not promise this loan. The model adds the borrowing to debt and FCFE. Under its existing opening-balance interest convention, interest on this loan starts in 2031. Operating assumptions and all balance and liquidity checks remain unchanged.
+
+## Validation
+
+The model estimates MP Materials at $0.00 per share, while MP was trading at approximately $48.59 per share on September 24, 2026; what assumptions or future improvements in cash flow explain the difference between the model and the market price?
