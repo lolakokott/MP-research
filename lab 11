@@ -1,0 +1,127 @@
+## Base Case output, python output from lab 10
+
+The original MP Materials pro-forma from Lab 10 was run before adding the sensitivity analysis. The accounting checks passed and the base-case results were saved for comparison with the restored base case after the sensitivity analysis.
+
+MP Materials — simplified Lab 10 scenario; assumptions in lab10.md.
+Retained Lab 09 rate and liquidity settings are classroom judgments.
+Gross profit is a pre-DD&A proxy; floor-plan financing is not applicable.
+
+COMPANY-SPECIFIC OPERATING LINE (metric tons of NdPr oxide equivalent)
+                                           FY2026E       FY2027E       FY2028E       FY2029E       FY2030E
+NdPr sales volume                          2,500.0       3,000.0       3,500.0       4,000.0       4,500.0
+NdPr volume replaces the same-store concept; revenue still grows by 10%.
+
+INCOME STATEMENT (USD millions)
+                                           FY2026E       FY2027E       FY2028E       FY2029E       FY2030E
+Revenue                                      246.9         271.6         298.7         328.6         361.5
+Cost of sales, excluding DD&A               -212.1        -233.3        -256.6        -282.3        -310.5
+Gross profit proxy, before DD&A               34.8          38.3          42.1          46.3          51.0
+SG&A                                        -123.3        -135.6        -149.1        -164.0        -180.5
+Depreciation                                 -76.2        -102.5        -108.3        -113.8        -119.0
+Impairment                                     0.0           0.0           0.0           0.0           0.0
+Operating income                            -164.6        -199.8        -215.3        -231.5        -248.5
+Interest                                     -55.7         -55.7         -55.7         -55.7         -60.4
+Pretax income                               -220.3        -255.4        -271.0        -287.2        -308.9
+Tax                                            0.0           0.0           0.0           0.0           0.0
+Net income                                  -220.3        -255.4        -271.0        -287.2        -308.9
+
+BALANCE SHEET (USD millions)
+                                           FY2026E       FY2027E       FY2028E       FY2029E       FY2030E
+Cash                                       1,118.7         739.8         349.3          25.0          25.0
+Inventory                                    188.8         207.7         228.5         251.3         276.5
+PP&E                                       1,843.7       1,948.0       2,046.6       2,139.7       2,227.7
+Other assets                                 492.7         492.9         493.1         493.3         493.6
+Total assets                               3,643.9       3,388.5       3,117.5       2,909.4       3,022.7
+Floor plan                                     0.0           0.0           0.0           0.0           0.0
+Term debt                                  1,023.0       1,023.0       1,023.0       1,023.0       1,323.0
+Revolver                                       0.0           0.0           0.0          79.1         201.2
+Other liabilities                            448.8         448.8         448.8         448.8         448.8
+Total liabilities                          1,471.8       1,471.8       1,471.8       1,550.9       1,973.0
+Redeemable preferred stock                   413.6         413.6         413.6         413.6         413.6
+Common equity                              1,758.5       1,503.1       1,232.1         944.9         636.1
+Liabilities + preferred + equity           3,643.9       3,388.5       3,117.5       2,909.4       3,022.7
+
+CASH FLOW (USD millions)
+                                           FY2026E       FY2027E       FY2028E       FY2029E       FY2030E
+Net income                                  -220.3        -255.4        -271.0        -287.2        -308.9
+Depreciation addback                          76.2         102.5         108.3         113.8         119.0
+Impairment addback                             0.0           0.0           0.0           0.0           0.0
+Capital spending                            -550.0        -206.9        -206.9        -206.9        -206.9
+Inventory increase                           -17.3         -18.9         -20.8         -22.8         -25.1
+Other working capital increase                -0.2          -0.2          -0.2          -0.2          -0.3
+Floor plan increase                            0.0           0.0           0.0           0.0           0.0
+New long-term borrowing                        0.0           0.0           0.0           0.0         300.0
+Term debt repayment                            0.0           0.0           0.0           0.0           0.0
+FCFE                                        -711.5        -378.9        -390.6        -403.4        -122.2
+Share buyback                                  0.0           0.0           0.0           0.0           0.0
+Revolver draw / (repayment)                    0.0           0.0           0.0          79.1         122.2
+Change in cash                              -711.5        -378.9        -390.6        -324.3           0.0
+Opening cash                               1,830.3       1,118.7         739.8         349.3          25.0
+Closing cash                               1,118.7         739.8         349.3          25.0          25.0
+
+ANNUAL CHECKS (USD millions)
+                                           FY2026E       FY2027E       FY2028E       FY2029E       FY2030E
+Assets - liabilities - pref - equity           0.0           0.0           0.0           0.0           0.0
+Cash minus minimum                         1,093.7         714.8         324.3           0.0           0.0
+Cash at or above minimum                      PASS          PASS          PASS          PASS          PASS
+FY2026: negative FCFE = $-711.545 million
+FY2027: negative FCFE = $-378.914 million
+FY2028: negative FCFE = $-390.551 million
+FY2029: negative FCFE = $-403.351 million
+FY2030: negative FCFE = $-122.175 million
+No terminal value: terminal FCFE is nonpositive.
+Growing negative cash flow forever is not a meaningful terminal value.
+
+Classroom equity value (USD millions): $0.00
+Share of value after 2030: N/A (zero equity value)
+Value per share (simplified Lab 10): $0.00
+This engine does not separately value preferred or conversion rights.
+
+## Question on MP Materials and Forecast Drivers
+
+Codex response: • For MP Materials, your forecast is driven mainly by operating costs, capital spending, and financing availability.
+
+## Choosing Operating Drivers
+
+Gross Revenue and CAPEX
+
+## Sensitivity Inputs
+
+### Gross Margin
+- Base: 14.10%
+- Lower: 12.10%
+- Higher: 16.10%
+- Years affected: 2026–2030
+- Range: +2 or -2 percentage points from the base as a judgment
+
+### Capex
+- Base: $550.000M in 2026 and $206.897M annually from 2027–2030
+- Lower: 10% below base
+- Higher: 10% above base
+- Years affected: 2026–2030
+- Range: +10% or -10% from the base as a judgment
+
+## Outputs
+
+For each sensitivity run, I will compare:
+- Final-year operating profit
+- Final-year FCFE
+- Value per share
+
+## Locked Changed-Input Record
+
+**Gross Margin:** 14.10% → 16.10%
+
+I expect higher gross margin to increase operating profit, FCFE, and value per share because a higher margin increases operating profitability.
+
+**Capex:** Base → 10% above base
+
+I expect higher capex to decrease FCFE and value per share because more cash is being spent on capital expenditures. I expect less of a direct effect on operating profit.
+
+**Timestamp:** September 29, 2026, 4:51 PM
+
+## Find the Driver
+
+Over these ranges, gross margin was the larger driver of final-year operating profit, with a span of $18.367 million compared with $5.838 million for capex.
+
+Capex was the larger driver of final-year FCFE, with a span of $25.434 million compared with $20.924 million for gross margin.
