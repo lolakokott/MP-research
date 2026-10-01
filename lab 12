@@ -1,0 +1,82 @@
+# Lab 12 — Analysis Review
+
+## Presentation Notes
+
+### Target Selection
+- Why I selected MP Materials: I selected MP Materials because I previously had not known much about the company. When I learned that it was a publically traded company with a positive outlook on investment and growth expectations, I was more interested to continue my projects with the company.
+- My initial view/question: I wanted to forecast whether or not this positive outlook was supported by the numbers.
+
+### Company and Evidence
+- How MP makes money: MP Materials produces and sells rare-earth materials. These products are usually used in things such as permamnent magnets. They are actively working on moving from just the mining and production sectors to the building of these magnets.
+- Main sources: MP Materials SEC filings, annual reports, company investor materials, and historical market-price data used in my earlier labs from Yahoo Finance
+- Reporting periods: Historical financial data from 2023–2025 with forecasts through 2030.
+- Units: USD millions
+
+### Pro-Forma
+- Main forecast assumptions: growth, gross margin, depreciation ratio, inventory days, tax rate, floor plan ratio, floor plan rate, impairment, buyback, repayment, other WC ratio, minimum cash, revolver rate, debt rate, revolver limit, SGA ratio, NDPR sales volume, new debt, capex
+- Company-specific drivers: Since MP is in a growth stage, operating improvement and capital expenditures are most important to the forecast. 
+- Accounting checks: 
+    Balance sheet check: PASS
+    Cash/liquidity headroom check: PASS
+    Revolver/financing constraint check: PASS
+
+### Valuation
+- Valuation date: September 10, 2026
+- DCF value per share: $11.17 per share
+- WACC: 12.02%
+- Terminal growth: 2%-4% tested in the DCF analysis
+- Reverse DCF: I used a reverse DCF to determine how much the explicit forecast growth assumptions would need to shift to support a specified market-price target while holding the other inputs fixed.
+- P/E result/limitation: P/E was not meaningful for MP because MP had negative EPS.
+
+### Sensitivity
+- Input tested: Capex
+- Base input: $550M in 2026 and $206.897M annually from 2027–2030
+- Changed input: Lower CAPEX — $495M in 2026 and $186.2073M annually from 2027–2030
+- Effect on statement: FY2030 operating profit increased by $5.838M, from -$248.455M to -$242.616M
+- Effect on FCFE: FY2030 FCFE increased by $25.434M, from -$122.175M to -$96.741M
+- Effect on value: N/A. Final-year FCFE remained negative, so the terminal-value condition was not met and a valid value per share was not produced.
+- Limitation of sensitivity ranking: The ranking only shows the impact of the assumptions over the specific ranges tested. It does not show which assumption is most uncertain or most likely to change.
+
+### Interpretation
+- Current conclusion: My DCF estimated MP at $11.17 per share, while the market price was $51.32. The P/E comparison was not meaningful because MP had negative EPS, so it did not provide additional support for the market price.
+- Biggest assumption/limitation: My valuation depends heavily on MP improving its future cash flows, especially by 2030. My pro-forma still produces negative FCFE in 2030, which limits the valuation I can support.
+- Evidence that could change my conclusion: Actual results or stronger company guidance showing higher future cash flows, improved profitability, or lower capital spending could change my conclusion.
+- What I would investigate next: I would investigate whether MP's expected growth and operating improvements can realistically produce sustainable positive cash flow.
+
+
+## As Presenter
+
+### Questions I Received
+- Question: Why was P/E not meaningful? 
+  - My answer: MP had negative EPS and only one usable peer remained.
+
+- Question: Why couldn't your sensitivity analysis calculate value per share?
+  - My answer: My 2030 FCFE remained negative, so the terminal-value condition failed. I kept the negative FCFE rather than treating it as a valid zero valuation.
+
+### Feedback Received
+- Strength: Clear explanation of how CAPEX affected FCFE.
+- Improvement: - Better support/explain my 10% revenue-growth assumption.
+
+### After Feedback
+- Keep: My overall DCF methodology.
+- Revise: My explanation/support for the 10% revenue-growth assumption.
+- Investigate: Whether MP's expected production and sales growth supports 10% annual revenue growth.
+- Did the review change my conclusion or research priority? Why? - No. My current valuation conclusion remains the same, but I would prioritize researching the revenue-growth assumption because it affects the reliability of my forecast.
+
+
+## As Reviewer
+
+### Questions I Asked
+- Selection/evidence: Why did you choose your company?
+- Model/valuation: What assumption has the biggest effect on your valuation, and how does it flow through your model?
+- Sensitivity/interpretation: Does your biggest sensitivity driver stay the biggest because of the ranges you tested, or do you think it would change if you used different ranges?
+
+### Evidence Check
+- Checked: DCF analysis
+- Partner's conclusions: 
+    - Main driver: capex and gross margin
+    - Biggest limitation: Uncertainity around remaining construction capex.
+
+### Feedback
+- Strength: Strong storytelling and personal connection to the company, with clear explanations of the analysis and conclusions.
+- Improvement: Make the MD files more concise and organized so the key assumptions, results, and conclusions are easier to follow.
